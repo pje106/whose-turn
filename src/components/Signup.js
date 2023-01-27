@@ -20,6 +20,7 @@ export default function Signup() {
     }
 
     try {
+      console.log("try")
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
@@ -27,14 +28,16 @@ export default function Signup() {
     } catch {
       setError("Failed to create an account");
     }
-
+    console.log("after try")
     setLoading(false);
   }
 
   return (
     <>
+    console.log("sign in")
       <Card>
         <Card.Body>
+          
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
