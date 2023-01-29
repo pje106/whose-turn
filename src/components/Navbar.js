@@ -1,29 +1,19 @@
-// import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import { Link, useMatch, useResolvedPath } from "react-router-dom"
 
 
-// export default function Navbar() {
-//   return (
-//     <nav className="nav">
-//       <Link to="/" className="site-title">
-//         Whose Turn
-//       </Link>
-//       <ul>
-//         <CustomLink to="/login">log in</CustomLink>
-//         <CustomLink to="/tasks">tasks</CustomLink>
-//       </ul>
-//     </nav>
-//   )
-// }
+export default function Navbar() {
+  return (
+    <nav className="nav">
 
-// function CustomLink({ to, children, ...props }) {
-//   const resolvedPath = useResolvedPath(to)
-//   const isActive = useMatch({ path: resolvedPath.pathname, end: true })
-
-//   return (
-//     <li className={isActive ? "active" : ""}>
-//       <Link to={to} {...props}>
-//         {children}
-//       </Link>
-//     </li>
-//   )
-// }
+      
+      <ul>
+      <Link to="/" className="whose-turn">
+        <img src = "../images/logo" alt="Logo"/>    
+        Whose Turn
+      </Link>
+        <Link to="/login">log in</Link>
+        <Link to="/tasks">tasks</Link>
+      </ul>
+    </nav>
+  )
+}
