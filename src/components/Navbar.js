@@ -1,5 +1,5 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
-
+import img1 from "../images/logo.png"
 
 export default function Navbar() {
   return (
@@ -8,7 +8,7 @@ export default function Navbar() {
       
       <ul>
       <Link to="/" className="whose-turn">
-        <img src = "../images/logo" alt="Logo"/>    
+        <img src = {img1} alt="Logo"/>    
         Whose Turn
       </Link>
         <Link to="/login">log in</Link>
