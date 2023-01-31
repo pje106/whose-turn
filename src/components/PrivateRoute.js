@@ -1,23 +1,25 @@
 import React from "react";
-
-import {  Redirect, useLocation } from "react-router-dom";
+import { Route, Redirect, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function PrivateRoute({ children }) {
-  const { currentUser } = useAuth();
+// export default function PrivateRoute({ children }) {
+//   const { currentUser } = useAuth();
+//   return currentUser ? children : <Redirect to="/login" />;
+//   const auth = useAuth();
+//   return auth ? children : <Redirect to="/login" />;
 
-  return currentUser ? children : <Redirect to="/login" />;
-};
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) => {
-//         return currentUser ? (
-//           <Component {...props} />
-//         ) : (
-//           <Redirect to="/login" />
-//         );
-//       }}
-//     ></Route>
-//   );
-// }
+export default function PrivateRoute({ component: Component, ...rest }) {
+  const { currentUser } = useAuth();
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return currentUser ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/login" />
+        );
+      }}
+    ></Route>
+  );
+}

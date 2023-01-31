@@ -14,14 +14,16 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import BoardForm from "./TaskForm";
 
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
+      {/* <Calendar /> */}
       <Container
         className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "80vh" }}
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Router>
@@ -35,6 +37,7 @@ function App() {
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />
+                <Route path="/addTask" component={BoardForm} />
                 <Route path="/tasks" component={Tasks} />
                 <Route path="/calendar" component={Calendar} />
                 <Route
