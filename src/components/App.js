@@ -14,21 +14,23 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import BoardForm from "./TaskForm";
+import TaskForm from "./TaskForm";
+import TaskList from "./TaskList";
 
 function App() {
   return (
     <>
-      <Navbar />
-      {/* <Calendar /> */}
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "80vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Router>
-            <AuthContextProvider>
-              <Switch>
+      <Router>
+        <Navbar />
+        <AuthContextProvider>
+          <Switch>
+            <Route path="/taskList" component={TaskList} />
+            <div
+              class="container"
+              className="d-flex align-items-center justify-content-center"
+              style={{ minHeight: "80vh" }}
+            >
+              <div className="w-100" style={{ maxWidth: "400px" }}>
                 <PrivateRoute exact path="/" component={Dashboard} />
                 <PrivateRoute
                   path="/update-profile"
@@ -37,22 +39,33 @@ function App() {
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />
-                <Route path="/addTask" component={BoardForm} />
-                <Route path="/tasks" component={Tasks} />
+              </div>
+
+              <div>
                 <Route path="/calendar" component={Calendar} />
-                <Route
-                  path="/"
-                  element={
-                    <PrivateRoute>
-                      <Dashboard />
-                    </PrivateRoute>
-                  }
-                ></Route>
-              </Switch>
-            </AuthContextProvider>
-          </Router>
-        </div>
-      </Container>
+              </div>
+
+              <div>
+                <Route path="/addTask">
+                  <TaskForm />
+                  <Tasks />
+                </Route>
+              </div>
+
+              <Route path="/tasks" component={Tasks} />
+              {/* <Route path="/calendar" component={Calendar} /> */}
+              <Route
+                path="/"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              ></Route>
+            </div>
+          </Switch>
+        </AuthContextProvider>
+      </Router>
     </>
   );
 }

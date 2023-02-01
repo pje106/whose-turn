@@ -1,22 +1,22 @@
-// import { Link, useMatch, useResolvedPath } from "react-router-dom"
-// import img1 from "../images/logo.png"
+// import { Link, useMatch, useResolvedPath } from "react-router-dom";
+// import img1 from "../images/logo.png";
 
 // export default function Navbar() {
 //   return (
 //     <nav className="nav">
-
 //       <ul>
-//       <Link to="/" className="whose-turn">
-//         <img src = {img1} alt="Logo"/>
-//         Whose Turn
-//       </Link>
+//         <Link to="/" className="whose-turn">
+//           <img src={img1} alt="Logo" />
+//           Whose Turn
+//         </Link>
 //         <Link to="/login">log in</Link>
 //         <Link to="/tasks">tasks</Link>
 //       </ul>
 //     </nav>
-//   )
+//   );
 // }
 
+import { useHistory } from "react-router-dom";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -31,17 +31,22 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Logout } from "@mui/icons-material";
 
-const pages = [""];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = [];
+// const settings = ["Dashboard", "Task", "Logout"];
+// dashboard is the update profite
+// Task will be the page of create and display the task list
 
-function ResponsiveAppBar() {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const history = useHistory();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -52,6 +57,30 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleClose = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleProfileClick = () => {
+    handleClose();
+    history.push("/");
+  };
+
+  const handleTaskClick = () => {
+    handleClose();
+    history.push("/addTask");
+  };
+
+  const handleCalendarClick = () => {
+    handleClose();
+    history.push("/calendar");
+  };
+
+  const handleLogoutClick = () => {
+    handleClose();
+    history.push("/login");
   };
 
   return (
@@ -82,7 +111,7 @@ function ResponsiveAppBar() {
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
-              aria-haspopup="true"
+              aria-haspopup="false"
               onClick={handleOpenNavMenu}
               color="inherit"
             >
@@ -108,13 +137,13 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">{page} </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -124,14 +153,14 @@ function ResponsiveAppBar() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: 900,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -145,18 +174,18 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{ mr: 1 }} />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: "40px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
-                horizontal: "right",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
@@ -166,11 +195,15 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+              <MenuItem onClick={handleProfileClick}>Dashboard</MenuItem>
+              <MenuItem onClick={handleTaskClick}>Task</MenuItem>
+              <MenuItem onClick={handleCalendarClick}>Calendar</MenuItem>
+              <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -178,4 +211,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Navbar;
