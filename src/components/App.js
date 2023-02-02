@@ -24,7 +24,6 @@ function App() {
         <Navbar />
         <AuthContextProvider>
           <Switch>
-            <Route path="/taskList" component={TaskList} />
             <div
               class="container"
               className="d-flex align-items-center justify-content-center"
@@ -39,20 +38,15 @@ function App() {
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />
+                <PrivateRoute path="/addTask" component={TaskForm} />
+                <PrivateRoute path="/tasks" component={Tasks} />
               </div>
 
               <div>
-                <Route path="/calendar" component={Calendar} />
+                <PrivateRoute path="/calendar" component={Calendar} />
               </div>
 
-              <div>
-                <Route path="/addTask">
-                  <TaskForm />
-                  <Tasks />
-                </Route>
-              </div>
-
-              <Route path="/tasks" component={Tasks} />
+              {/* <Route path="/tasks" component={Tasks} /> */}
               {/* <Route path="/calendar" component={Calendar} /> */}
               <Route
                 path="/"

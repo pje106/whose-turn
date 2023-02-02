@@ -68,7 +68,7 @@ function Navbar() {
     history.push("/");
   };
 
-  const handleTaskClick = () => {
+  const handleAddTaskClick = () => {
     handleClose();
     history.push("/addTask");
   };
@@ -83,19 +83,24 @@ function Navbar() {
     history.push("/login");
   };
 
+  const handleCheckTaskClick = () => {
+    handleClose();
+    history.push("/tasks");
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AdbIcon />
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="a"
             href="http://localhost:3000/"
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
+              ml: 2,
+              // display: { md: "flex", ml: "2" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
@@ -103,11 +108,11 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            WHOSE TURN
+            ToDo
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -116,7 +121,7 @@ function Navbar() {
               color="inherit"
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -142,7 +147,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
           {/* <Typography
             variant="h5"
             noWrap
@@ -201,7 +206,8 @@ function Navbar() {
                 </MenuItem>
               ))} */}
               <MenuItem onClick={handleProfileClick}>Dashboard</MenuItem>
-              <MenuItem onClick={handleTaskClick}>Task</MenuItem>
+              <MenuItem onClick={handleAddTaskClick}>Add Task</MenuItem>
+              <MenuItem onClick={handleCheckTaskClick}>Check Task</MenuItem>
               <MenuItem onClick={handleCalendarClick}>Calendar</MenuItem>
               <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
             </Menu>

@@ -21,21 +21,20 @@ const TaskForm = ({ addTaskCallbackFunc }) => {
 
   const titleRef = useRef();
   const tiemRangeRef = useRef();
-  const numOfPerpleRef = useRef();
-  const nameRef = useRef();
+  const descriptionRef = useRef();
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    console.log("handle change called");
+  // const handleChange = (e) => {
+  //   console.log("handle change called");
 
-    const newFormData = {
-      ...formData,
-      [e.target.name]: e.target.value,
-    };
+  //   const newFormData = {
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   };
 
-    console.log(newFormData);
-    setFormData(newFormData);
-  };
+  //   console.log(newFormData);
+  //   setFormData(newFormData);
+  // };
 
   const handleNewTaskSubmit = (e) => {
     e.preventDefault();
@@ -50,8 +49,13 @@ const TaskForm = ({ addTaskCallbackFunc }) => {
           <h2 className="text-center mb-4"> Add New Task </h2>
           <Form onSubmit={handleNewTaskSubmit}>
             <Form.Group id="title">
-              <Form.Label>Task Title</Form.Label>
+              <Form.Label>Title</Form.Label>
               <Form.Control type="title" ref={titleRef} required />
+            </Form.Group>
+
+            <Form.Group id="description">
+              <Form.Label>Description</Form.Label>
+              <Form.Control type="description" ref={descriptionRef} required />
             </Form.Group>
 
             <Form.Group id="startTime">
@@ -64,7 +68,7 @@ const TaskForm = ({ addTaskCallbackFunc }) => {
               <Form.Control type="date" ref={tiemRangeRef} required />
             </Form.Group>
 
-            <Form.Group id="numberOfPeople">
+            {/* <Form.Group id="numberOfPeople">
               <Form.Label>Number of People Participant</Form.Label>
               <Form.Control
                 input
@@ -74,12 +78,7 @@ const TaskForm = ({ addTaskCallbackFunc }) => {
                 ref={numOfPerpleRef}
                 required
               />
-            </Form.Group>
-
-            <Form.Group id="name">
-              <Form.Label>Name of Participant</Form.Label>
-              <Form.Control type="name" ref={nameRef} required />
-            </Form.Group>
+            </Form.Group> */}
 
             <Button disabled={loading} className="w-100 mt-2" type="submit">
               Submit
