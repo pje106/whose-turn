@@ -70,13 +70,13 @@ const Task = ({ todos, completeTodo, removeTodo, updateTodo }) => {
           onClick={() => completeTodo(todo.id)}
           className="complete-icon"
         />
-        <MdOutlineDeleteOutline
-          onClick={() => removeTodo(todo.id)}
-          className="delete-icon"
-        />
         <TiPen
           onClick={() => setEdit({ id: todo.id, value: todo.text })}
           className="edit-icon"
+        />
+        <MdOutlineDeleteOutline
+          onClick={() => removeTodo(todo.id)}
+          className="delete-icon"
         />
       </div>
     </div>
