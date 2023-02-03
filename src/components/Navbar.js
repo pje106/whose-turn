@@ -32,6 +32,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Logout } from "@mui/icons-material";
+import { deepPurple } from "@mui/material/colors";
 
 const pages = [];
 // const settings = ["Dashboard", "Task", "Logout"];
@@ -43,9 +44,9 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const history = useHistory();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -97,7 +98,7 @@ function Navbar() {
             variant="h4"
             noWrap
             component="a"
-            href="http://localhost:3000/"
+            href="/"
             sx={{
               ml: 2,
               // display: { md: "flex", ml: "2" },
@@ -181,7 +182,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ mr: 1 }} />
+                <Avatar sx={{ mr: 1, bgcolor: deepPurple[400] }}></Avatar>
               </IconButton>
             </Tooltip>
             <Menu
