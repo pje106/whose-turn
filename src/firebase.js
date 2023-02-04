@@ -34,7 +34,5 @@ const app = initializeApp({
 // if (!initializeApp.appId) throw new Error("missing firebase credential:appId");
 
 export const db = getFirestore(app);
-// Initialize Firebase
-
 export const auth = getAuth(app);
 export default app;

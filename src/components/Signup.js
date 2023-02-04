@@ -17,11 +17,9 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     if (password !== passwordConfirm) {
       return setError("Passwords do not match");
     }
-
     try {
       setError("");
       setLoading(true);

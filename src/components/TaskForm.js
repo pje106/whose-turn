@@ -156,28 +156,57 @@
 // export default TaskForm;
 
 import React, { useState, useEffect, useRef } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 function TaskForm(props) {
-  const [input, setInput] = useState(props.edit ? props.edit.value : "");
+  //const [input, setInput] = useState(props.edit ? props.edit.value : "");
+  const [input, setInput] = useState("");
   const inputRef = useRef(null);
 
   useEffect(() => {
     inputRef.current.focus();
   });
 
-  const handleChange = (e) => {
-    setInput(e.target.value);
+  // const handleChange = (e) => {
+  //   setInput(e.target.value);
+  // };
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setInput(value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     props.onSubmit({
       id: Math.floor(Math.random() * 10000),
       text: input,
     });
+    await addDoc(collection(db, "tasks"), {
+      input,
+      createdAt: Date.now(),
+    });
     setInput("");
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  // props.onSubmit({
+  //   id: Math.floor(Math.random() * 10000),
+  //   text: input,
+  // });
+  //   const onSubmit = async (event) => {
+  //     event.preventDefault();
+  //     await addDoc(collection(dbService, "nweets"), {
+  //     nweet,
+  //     createdAt: Date.now(),
+  //     });
+
+  //   setInput("");
+  // };
 
   return (
     <form onSubmit={handleSubmit} className="todo-form">

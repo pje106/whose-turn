@@ -79,10 +79,10 @@ function Navbar() {
     history.push("/calendar");
   };
 
-  const handleLogoutClick = () => {
-    handleClose();
-    history.push("/login");
-  };
+  // const handleLogoutClick = () => {
+  //   handleClose();
+  //   history.push("/login");
+  // };
 
   const handleCheckTaskClick = () => {
     handleClose();
@@ -210,7 +210,7 @@ function Navbar() {
               <MenuItem onClick={handleAddTaskClick}>Add Task</MenuItem>
               <MenuItem onClick={handleCheckTaskClick}>Check Task</MenuItem>
               <MenuItem onClick={handleCalendarClick}>Calendar</MenuItem>
-              <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+              {/* <MenuItem onClick={handleLogout}>Logout</MenuItem> */}
             </Menu>
           </Box>
         </Toolbar>
