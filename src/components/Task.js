@@ -59,27 +59,29 @@ const Task = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   }
 
   return todos.map((todo, index) => (
-    <div
-      className={todo.isComplete ? "todo-row complete" : "todo-row"}
-      key={index}
-    >
-      <div key={todo.id}>{todo.text}</div>
+    <>
+      <div
+        className={todo.isComplete ? "todo-row complete" : "todo-row"}
+        key={index}
+      >
+        <div key={todo.id}>{todo.text}</div>
 
-      <div className="icons">
-        <MdOutlinePlaylistAddCheck
-          onClick={() => completeTodo(todo.id)}
-          className="complete-icon"
-        />
-        <TiPen
-          onClick={() => setEdit({ id: todo.id, value: todo.text })}
-          className="edit-icon"
-        />
-        <MdOutlineDeleteOutline
-          onClick={() => removeTodo(todo.id)}
-          className="delete-icon"
-        />
+        <div className="icons">
+          <MdOutlinePlaylistAddCheck
+            onClick={() => completeTodo(todo.id)}
+            className="complete-icon"
+          />
+          <TiPen
+            onClick={() => setEdit({ id: todo.id, value: todo.text })}
+            className="edit-icon"
+          />
+          <MdOutlineDeleteOutline
+            onClick={() => removeTodo(todo.id)}
+            className="delete-icon"
+          />
+        </div>
       </div>
-    </div>
+    </>
   ));
 };
 

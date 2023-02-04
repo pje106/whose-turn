@@ -61,7 +61,6 @@ export function AuthContextProvider({ children }) {
       setCurrentUser(user);
       setLoading(false);
     });
-
     return unsubscribe;
   }, []);
 

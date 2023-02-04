@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Signup from "./Signup";
 //import { Container } from "react-bootstrap";
 import { AuthContextProvider } from "../contexts/AuthContext";
@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //import ReactDOM from "react-dom/client";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
-import Tasks from "./Tasks";
+import ReadTasks from "./ReadTasks";
 import Navbar from "./Navbar";
 import Calendar from "./Calendar";
 import PrivateRoute from "./PrivateRoute";
@@ -17,8 +17,10 @@ import UpdateProfile from "./UpdateProfile";
 //import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 import "./App.css";
+//import { auth } from "../firebase";
 
 function App() {
+  // const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser);
   return (
     <>
       <Router>
@@ -32,7 +34,7 @@ function App() {
             >
               <div className="w-100">
                 <PrivateRoute path="/addTask" component={TaskList} />
-                <PrivateRoute path="/tasks" component={Tasks} />
+                <PrivateRoute path="/tasks" component={ReadTasks} />
                 <PrivateRoute path="/calendar" component={Calendar} />
 
                 <PrivateRoute exact path="/" component={Dashboard} />

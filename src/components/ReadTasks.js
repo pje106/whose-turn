@@ -6,7 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const usersCollectionRef = collection(db, "users");
+  const usersCollectionRef = collection(db, "tasks");
 
   //   const createTask = async () => {
   //     await addDoc(usersCollectionRef, { name: newTask });
@@ -20,20 +20,18 @@ function App() {
   }, []);
 
   return (
-    <div>
-      {users.map((user) => {
-        return (
-          <div>
-            {" "}
-            <h3> firstName: {user.firstName} </h3>
-            <h3> Lastname: {user.lastName} </h3>
-            <h3> email: {user.emial} </h3>
-            <h3> phone: {user.phone} </h3>
-            <h3> tasks: {user.tasks} </h3>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div>
+        {users.map((user) => {
+          return (
+            <div>
+              {" "}
+              <h3> Tasks: {user.input} </h3>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 
