@@ -2,13 +2,14 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
 
 export default function UpdateProfile() {
+  const fullNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { currentUser, emailChange, passwordChange } = useAuth();
-  // const { currentUser, updatePassword, updateEmail } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -23,13 +24,9 @@ export default function UpdateProfile() {
     setLoading(true);
     setError("");
 
-    // if (emailRef.current.value !== currentUser.email) {
-    //   promises.push(updateEmail(emailRef.current.value));
-    // }
-    // if (passwordRef.current.value) {
-    //   promises.push(updatePassword(passwordRef.current.value));
-    // }
-
+    if (fullNameRef.current.value !== currentUser.displayName) {
+      promises.push(updateProfile(fullNameRef.current.value));
+    }
     if (emailRef.current.value !== currentUser.email) {
       promises.push(emailChange(emailRef.current.value));
     }
@@ -56,6 +53,15 @@ export default function UpdateProfile() {
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+            <Form.Group id="fullName">
+              <Form.Label>User Name</Form.Label>
+              <Form.Control
+                type="fullName"
+                ref={fullNameRef}
+                required
+                defaultValue={currentUser.displayName}
+              />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -66,19 +72,15 @@ export default function UpdateProfile() {
               />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                ref={passwordRef}
-                placeholder="Leave blank to keep the same"
-              />
+              <Form.Label>New Password</Form.Label>
+              <Form.Control type="password" ref={passwordRef} placeholder="" />
             </Form.Group>
             <Form.Group id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control
                 type="password"
                 ref={passwordConfirmRef}
-                placeholder="Leave blank to keep the same"
+                placeholder=""
               />
             </Form.Group>
             <Button disabled={loading} className="w-100 mt-2" type="submit">

@@ -20,19 +20,6 @@ const app = initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 });
 
-// help us to debugging later:
-// if (!initializeApp.apiKey)
-//   throw new Error("missing firebase credential:apiKey");
-// if (!initializeApp.authDomain)
-//   throw new Error("missing firebase credential:authDomain");
-// if (!initializeApp.projectId)
-//   throw new Error("missing firebase credential:projectId");
-// if (!initializeApp.storageBucket)
-//   throw new Error("missing firebase credential:storageBucket");
-// if (!initializeApp.messagingSenderId)
-//   throw new Error("missing firebase credential:messagingSenderId");
-// if (!initializeApp.appId) throw new Error("missing firebase credential:appId");
-
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export default app;

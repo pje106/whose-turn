@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+// import userEvent from "@testing-library/user-event";
+// import { updateCurrentUser } from "firebase/auth";
+//import { auth} from "../firebase";
 
 export default function Signup() {
   // const emailRef = useRef();
   // const passwordRef = useRef();
   // const passwordConfirmRef = useRef();
+
   const [email, setEmail] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const { signup } = useAuth();
@@ -23,7 +28,7 @@ export default function Signup() {
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
+      await signup(email, password, displayName);
       history.push("/");
     } catch {
       setError("Failed to create an account");
@@ -38,6 +43,15 @@ export default function Signup() {
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+            <Form.Group id="displayName">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                type="displayName"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                required
+              />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control

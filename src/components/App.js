@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Signup from "./Signup";
 //import { Container } from "react-bootstrap";
 import { AuthContextProvider } from "../contexts/AuthContext";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 //import ReactDOM from "react-dom/client";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
@@ -36,7 +36,6 @@ function App() {
                 <PrivateRoute path="/addTask" component={TaskList} />
                 <PrivateRoute path="/tasks" component={ReadTasks} />
                 <PrivateRoute path="/calendar" component={Calendar} />
-
                 <PrivateRoute exact path="/" component={Dashboard} />
                 <PrivateRoute
                   path="/update-profile"

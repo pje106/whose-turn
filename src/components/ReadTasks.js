@@ -3,8 +3,15 @@ import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 // import { addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
+// import {
+//   MdOutlineDeleteOutline,
+//   MdOutlinePlaylistAddCheck,
+// } from "react-icons/md";
+// import { TiPen } from "react-icons/ti";
+// import TaskForm from "./TaskForm";
+// import Task from "./Task";
 
-function App() {
+function ReadTasks({ completeTodo, removeTodo, updateTodo }) {
   const [users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "tasks");
 
@@ -19,20 +26,31 @@ function App() {
     getUsers();
   }, []);
 
+  // const [edit, setEdit] = useState({
+  //   id: null,
+  //   input: "",
+  // });
+
+  // const submitUpdate = (input) => {
+  //   updateTodo(edit.id, input);
+  //   setEdit({
+  //     id: null,
+  //     input: "",
+  //   });
+  // };
+
+  // if (edit.id) {
+  //   return <TaskForm edit={edit} onSubmit={submitUpdate} />;
+  // }
+
   return (
     <>
-      <div>
+      <div className="list-contain">
         {users.map((user) => {
-          return (
-            <div>
-              {" "}
-              <h3> Tasks: {user.input} </h3>
-            </div>
-          );
+          return <div className="todo-row"> Tasks: {user.input}</div>;
         })}
       </div>
     </>
   );
 }
-
-export default App;
+export default ReadTasks;

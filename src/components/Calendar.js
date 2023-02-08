@@ -45,34 +45,51 @@
 
 // export default Calendar;
 
-import * as React from "react";
-import dayjs from "dayjs";
-import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
+// import * as React from "react";
+// import dayjs from "dayjs";
+// import TextField from "@mui/material/TextField";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 
-const isWeekend = (date) => {
-  const day = date.day();
+// const isWeekend = (date) => {
+//   const day = date.day();
+//   return day === 0 || day === 6;
+// };
 
-  return day === 0 || day === 6;
-};
+// export default function StaticDatePickerLandscape() {
+//   const [value, setValue] = React.useState(dayjs(""));
 
-export default function StaticDatePickerLandscape() {
-  const [value, setValue] = React.useState(dayjs(""));
+//   return (
+//     <LocalizationProvider dateAdapter={AdapterDayjs}>
+//       <StaticDatePicker
+//         orientation="landscape"
+//         openTo="day"
+//         value={value}
+//         shouldDisableDate={isWeekend}
+//         onChange={(newValue) => {
+//           setValue(newValue);
+//         }}
+//         renderInput={(params) => <TextField {...params} />}
+//       />
+//     </LocalizationProvider>
+//   );
+// }
+
+import React, { useState } from "react";
+import Calendar from "rc-calendar";
+import "rc-calendar/assets/index.css";
+
+function App() {
+  const [date, setDate] = useState(new Date());
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDatePicker
-        orientation="landscape"
-        openTo="day"
-        value={value}
-        shouldDisableDate={isWeekend}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
-    </LocalizationProvider>
+    <div style={{ display: "flex", alignItems: "center", height: "10px" }}>
+      <div style={{ margin: "auto" }}>
+        <Calendar value={date} onChange={(value) => setDate(value)} />
+      </div>
+    </div>
   );
 }
+
+export default App;

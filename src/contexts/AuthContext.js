@@ -6,6 +6,7 @@ import {
   // onAuthStateChanged,
   updateEmail,
   updatePassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -16,16 +17,29 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-// export function AuthProvider({ children }) {
-//   const [currentUser, setCurrentUser] = useState();
-//   const [loading, setLoading] = useState(true);
-
 export function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  // function signup(email, password) {
+  //   return createUserWithEmailAndPassword(auth, email, password);
+  // }
+
+  async function signup(email, password, displayName) {
+    if (displayName.length === 0) {
+      alert("name cannot be empty");
+    } else {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(`User ${user.uid} created`);
+      await updateProfile(user, {
+        displayName: displayName,
+      });
+      console.log("User profile updated");
+    }
   }
 
   function login(email, password) {
@@ -40,14 +54,6 @@ export function AuthContextProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
-  // function updateEmail(email) {
-  //   return currentUser.updateEmail(email);
-  // }
-
-  // function updatePassword(password) {
-  //   return currentUser.updatePassword(password);
-  // }
-
   function emailChange(email) {
     return updateEmail(currentUser, email);
   }
@@ -56,23 +62,16 @@ export function AuthContextProvider({ children }) {
     return updatePassword(currentUser, password);
   }
 
+  const [userObj, setUserObj] = useState(null);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      setUserObj(user);
       setLoading(false);
     });
     return unsubscribe;
   }, []);
 
-  // const value = {
-  //   currentUser,
-  //   login,
-  //   signup,
-  //   logout,
-  //   resetPassword,
-  //   updateEmail,
-  //   updatePassword,
-  // };
   const value = {
     currentUser,
     login,
