@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { collection, addDoc, query, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
 
 function TaskForm(props) {
   //const [input, setInput] = useState(props.edit ? props.edit.value : "");
@@ -11,7 +12,6 @@ function TaskForm(props) {
   const getTasks = async () => {
     const q = query(collection(db, "tasks"));
     const querySnapshot = await getDocs(q);
-    // const dbTasks = await collection(db, "tasks").get();
     querySnapshot.forEach((doc) => {
       const taskObj = {
         ...doc.data(),
@@ -41,15 +41,21 @@ function TaskForm(props) {
     setInput(value);
   };
 
+  const { currentUser } = useAuth();
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!currentUser) {
+      return;
+    }
     props.onSubmit({
       id: Math.floor(Math.random() * 10000),
       text: input,
     });
     await addDoc(collection(db, "tasks"), {
-      input,
+      text: input,
       createdAt: Date.now(),
+      creatorId: currentUser.uid,
     });
     setInput("");
   };
@@ -71,6 +77,7 @@ function TaskForm(props) {
   //   setInput("");
   // };
 
+  console.log(inputs);
   return (
     <>
       <form onSubmit={handleSubmit} className="todo-form">

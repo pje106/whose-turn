@@ -3,7 +3,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  // onAuthStateChanged,
   updateEmail,
   updatePassword,
   updateProfile,
@@ -62,6 +61,18 @@ export function AuthContextProvider({ children }) {
     return updatePassword(currentUser, password);
   }
 
+  // const [userObj, setUserObj] = useState(null);
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       setLoading(true);
+  //       setUserObj(user);
+  //     } else {
+  //       setLoading(false);
+  //     }
+  //     return unsubscribe;
+  //   });
+  // }, []);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -82,6 +93,7 @@ export function AuthContextProvider({ children }) {
     passwordChange,
   };
 
+  console.log(userObj);
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

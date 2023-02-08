@@ -47,7 +47,7 @@ function ReadTasks({ completeTodo, removeTodo, updateTodo }) {
     <>
       <div className="list-contain">
         {users.map((user) => {
-          return <div className="todo-row"> Tasks: {user.input}</div>;
+          return <div className="todo-row">Tasks: {user.text}</div>;
         })}
       </div>
     </>
