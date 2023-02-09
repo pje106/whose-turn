@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { db } from "../firebase";
+import { collection } from "firebase/firestore";
 //import { auth } from "../firebase";
 
 export default function Dashboard() {
@@ -18,6 +20,14 @@ export default function Dashboard() {
       setError("Failed to log out");
     }
   }
+
+  const getMyTask = async () => {
+    const tasks = await collection(db, "tasks")
+      .where("createdId", "==", currentUser.uid)
+      .orderby("createdId")
+      .get();
+    console.log(tasks.docs((doc) => doc.data()));
+  };
 
   return (
     <>

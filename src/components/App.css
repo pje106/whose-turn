@@ -1,3 +1,7 @@
+.App {
+  text-align: center;
+}
+
 /* .App {
   text-align: center;
 }
@@ -138,11 +142,11 @@ h4 {
   align-items: center;
   margin: 4px auto;
   color: #fff;
-  background: linear-gradient(
+  /* background: linear-gradient(
     90deg,
     rgb(207, 138, 89) 0%,
     rgb(248, 145, 104) 100%
-  );
+  ); */
   padding: 16px;
   border-radius: 5px;
   width: 90%;
@@ -175,16 +179,8 @@ h4 {
 .todo-row:nth-child(4n + 4) {
   background: linear-gradient(
     90deg,
-    rgb(250, 91, 176) 0%,
-    hsl(355, 96%, 69%) 100%
-  );
-}
-
-.todo-row:nth-child(4n + 5) {
-  background: linear-gradient(
-    90deg,
-    rgb(251, 191, 10) 100%,
-    rgb(247, 211, 47) 0%
+    rgb(207, 138, 89) 0%,
+    rgb(248, 145, 104) 100%
   );
 }
 

@@ -1,39 +1,49 @@
 import React, { useState, useEffect, useRef } from "react";
-import { collection, addDoc, query, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  // query,
+  // getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 
 function TaskForm(props) {
-  //const [input, setInput] = useState(props.edit ? props.edit.value : "");
   const [input, setInput] = useState("");
   const [inputs, setInputs] = useState([]);
+  const { currentUser } = useAuth();
   const inputRef = useRef(null);
 
-  const getTasks = async () => {
-    const q = query(collection(db, "tasks"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      const taskObj = {
-        ...doc.data(),
-        id: doc.id,
-      };
-
-      setInputs((prev) => [taskObj, ...prev]);
-      console.log(taskObj);
-    });
-  };
+  // const getTasks = async () => {
+  //   const q = query(collection(db, "tasks").orderBy("createdAt", "desc"));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     const taskObj = {
+  //       ...doc.data(),
+  //       id: doc.id,
+  //     };
+  //     setInputs((prev) => [taskObj, ...prev]);
+  //     console.log(taskObj);
+  //   });
+  // };
 
   useEffect(() => {
-    getTasks();
+    // getTasks();
+    const unsub = onSnapshot(collection(db, "tasks"), (snapshot) => {
+      const taskArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setInputs(taskArray);
+    });
+    return unsub;
   }, []);
 
   useEffect(() => {
     inputRef.current.focus();
   });
 
-  // const handleChange = (e) => {
-  //   setInput(e.target.value);
-  // };
   const handleChange = (event) => {
     const {
       target: { value },
@@ -41,41 +51,20 @@ function TaskForm(props) {
     setInput(value);
   };
 
-  const { currentUser } = useAuth();
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (!currentUser) {
-      return;
-    }
     props.onSubmit({
       id: Math.floor(Math.random() * 10000),
       text: input,
     });
     await addDoc(collection(db, "tasks"), {
       text: input,
-      createdAt: Date.now(),
       creatorId: currentUser.uid,
+      //createdAt: serverTimestamp(),
+      createdAt: Date.now(), //only this one can convert to date in ReadTasks
     });
     setInput("");
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  // props.onSubmit({
-  //   id: Math.floor(Math.random() * 10000),
-  //   text: input,
-  // });
-  //   const onSubmit = async (event) => {
-  //     event.preventDefault();
-  //     await addDoc(collection(dbService, "nweets"), {
-  //     nweet,
-  //     createdAt: Date.now(),
-  //     });
-
-  //   setInput("");
-  // };
 
   console.log(inputs);
   return (

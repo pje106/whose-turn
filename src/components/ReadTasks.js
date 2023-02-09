@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
 // import { addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 // import {
 //   MdOutlineDeleteOutline,
@@ -12,8 +13,9 @@ import { collection, getDocs } from "firebase/firestore";
 // import Task from "./Task";
 
 function ReadTasks({ completeTodo, removeTodo, updateTodo }) {
-  const [users, setUsers] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const usersCollectionRef = collection(db, "tasks");
+  const { currentUser } = useAuth();
 
   //   const createTask = async () => {
   //     await addDoc(usersCollectionRef, { name: newTask });
@@ -21,33 +23,24 @@ function ReadTasks({ completeTodo, removeTodo, updateTodo }) {
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setTasks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUsers();
   }, []);
 
-  // const [edit, setEdit] = useState({
-  //   id: null,
-  //   input: "",
-  // });
-
-  // const submitUpdate = (input) => {
-  //   updateTodo(edit.id, input);
-  //   setEdit({
-  //     id: null,
-  //     input: "",
-  //   });
-  // };
-
-  // if (edit.id) {
-  //   return <TaskForm edit={edit} onSubmit={submitUpdate} />;
-  // }
-
   return (
     <>
+      <h3 style={{ textAlign: "center" }}>ToDo Tasks</h3>
       <div className="list-contain">
-        {users.map((user) => {
-          return <div className="todo-row">Tasks: {user.text}</div>;
+        {tasks.map((task) => {
+          return (
+            <div className="todo-row" key={task.id}>
+              <div>{task.text}</div>
+              {/* <div>by {currentUser.displayName}</div> */}
+              <div>{new Date(task.createdAt).toLocaleDateString()}</div>
+            </div>
+            //new Date(task.createdAt).toUTCString()
+          );
         })}
       </div>
     </>
