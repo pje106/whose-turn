@@ -5,6 +5,7 @@ import {
   // query,
   // getDocs,
   onSnapshot,
+  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -60,7 +61,8 @@ function TaskForm(props) {
     await addDoc(collection(db, "tasks"), {
       text: input,
       creatorId: currentUser.uid,
-      //createdAt: serverTimestamp(),
+      name: currentUser.displayName,
+      //createdTRange: serverTimestamp(),
       createdAt: Date.now(), //only this one can convert to date in ReadTasks
     });
     setInput("");

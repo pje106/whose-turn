@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
@@ -22,12 +22,17 @@ export default function Dashboard() {
   }
 
   const getMyTask = async () => {
-    const tasks = await collection(db, "tasks")
-      .where("createdId", "==", currentUser.uid)
-      .orderby("createdId")
+    const tasks = await db
+      .collection("tasks")
+      .where("creatorId", "==", currentUser.uid)
+      .orderby("createdAt")
       .get();
-    console.log(tasks.docs((doc) => doc.data()));
+    console.log(tasks.docs.map((doc) => doc.data()));
   };
+
+  useEffect(() => {
+    getMyTask();
+  }, []);
 
   return (
     <>

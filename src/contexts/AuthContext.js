@@ -11,7 +11,7 @@ import { auth } from "../firebase";
 
 // const AuthContext = React.createContext();
 const AuthContext = createContext();
-
+export { AuthContext };
 export function useAuth() {
   return useContext(AuthContext);
 }
@@ -73,11 +73,11 @@ export function AuthContextProvider({ children }) {
   //     return unsubscribe;
   //   });
   // }, []);
-  const [userObj, setUserObj] = useState(null);
+  // const [userObj, setUserObj] = useState(null);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setUserObj(user);
+      // setUserObj(user);
       setLoading(false);
     });
     return unsubscribe;
@@ -93,7 +93,6 @@ export function AuthContextProvider({ children }) {
     passwordChange,
   };
 
-  console.log(userObj);
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
