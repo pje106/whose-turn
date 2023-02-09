@@ -37,7 +37,8 @@ function ReadTasks({ completeTodo, removeTodo, updateTodo }) {
             <div className="todo-row" key={task.id}>
               <div>{task.text}</div>
               {/* <div>by {currentUser.displayName}</div> */}
-              <div>{new Date(task.createdAt).toLocaleDateString()}</div>
+              <div>by {task.name}</div>
+              {/* <div>{new Date(task.createdAt).toLocaleDateString()}</div> */}
             </div>
             //new Date(task.createdAt).toUTCString()
           );

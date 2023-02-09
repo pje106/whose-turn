@@ -60,6 +60,7 @@ function TaskForm(props) {
     await addDoc(collection(db, "tasks"), {
       text: input,
       creatorId: currentUser.uid,
+      name: currentUser.displayName,
       //createdAt: serverTimestamp(),
       createdAt: Date.now(), //only this one can convert to date in ReadTasks
     });
