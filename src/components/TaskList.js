@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TaskForm from "./TaskForm";
 import Task from "./Task";
+import ReadTasks from "./ReadTasks";
 
 function TaskList() {
   const [todos, setTodos] = useState([]);
@@ -53,6 +54,7 @@ function TaskList() {
         removeTodo={removeTodo}
         updateTodo={updateTodo}
       />
+      <ReadTasks />
       {/* </Link> */}
     </>
   );

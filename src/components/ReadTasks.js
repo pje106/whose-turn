@@ -30,13 +30,12 @@ function ReadTasks({ completeTodo, removeTodo, updateTodo }) {
 
   return (
     <>
-      <h3 style={{ textAlign: "center" }}>ToDo Tasks</h3>
+      <h3 style={{ textAlign: "center" }}>ToDo List</h3>
       <div className="list-contain">
         {tasks.map((task) => {
           return (
             <div className="todo-row" key={task.id}>
               <div>{task.text}</div>
-              {/* <div>by {currentUser.displayName}</div> */}
               <div>by {task.name}</div>
               {/* <div>{new Date(task.createdAt).toLocaleDateString()}</div> */}
             </div>

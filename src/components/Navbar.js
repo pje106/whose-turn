@@ -31,13 +31,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { deepPurple } from "@mui/material/colors";
+
 // import { Logout } from "@mui/icons-material";
 // import MenuIcon from "@mui/icons-material/Menu";
 
 const pages = [];
-// const settings = ["Dashboard", "Task", "Logout"];
-// dashboard is the update profite
-// Task will be the page of create and display the task list
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -99,7 +97,7 @@ function Navbar() {
               variant="h4"
               noWrap
               component="a"
-              href="/"
+              href="/tasks#/tasks"
               sx={{
                 ml: 2,
                 // display: { md: "flex", ml: "2" },
@@ -183,7 +181,12 @@ function Navbar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ mr: 1, bgcolor: deepPurple[400] }}></Avatar>
+                  <Avatar
+                    sx={{
+                      mr: 1,
+                      bgcolor: deepPurple[400],
+                    }}
+                  ></Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
