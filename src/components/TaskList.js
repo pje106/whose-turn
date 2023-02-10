@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import TaskForm from "./TaskForm";
 import Task from "./Task";
 import ReadTasks from "./ReadTasks";
+//import { db } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
 
 function TaskList() {
   const [todos, setTodos] = useState([]);
+  const { currentUser } = useAuth();
 
   const addTodo = (todo) => {
-    // even the user enter lot of spaces there, will still display
+    if (todo.text.length === 0) {
+      window.alert("Please enter a value for the todo item.");
+    }
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }
-
+    //|| /^\s*$/.test(todo.text)
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
     console.log(...todos);
@@ -45,16 +50,22 @@ function TaskList() {
 
   return (
     <>
-      <h4>Plan Start From Today!</h4>
+      <h4>
+        Welcome! <strong>{currentUser.displayName}</strong>
+      </h4>
       <TaskForm onSubmit={addTodo} />
       {/* <Link style={{ textDecoration: "none" }} to="/tasks"> */}
       <Task
         todos={todos}
+        // completeTodo={completeTodo}
+        // removeTodo={removeTodo}
+        // updateTodo={updateTodo}
+      />
+      <ReadTasks
         completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
       />
-      <ReadTasks />
       {/* </Link> */}
     </>
   );

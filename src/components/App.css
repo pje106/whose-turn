@@ -90,7 +90,7 @@ h4 {
 
 .todo-input {
   padding: 14px 32px 14px 16px;
-  border-radius: 4px 0 0 4px;
+  border-radius: 10px 0 0 10px;
   border: 2px solid #3378e8;
   outline: none;
   width: 320px;
@@ -110,7 +110,7 @@ h4 {
   outline: none;
   background: linear-gradient(
     80deg,
-    rgb(59, 77, 241) 0%,
+    rgb(113, 125, 236) 0%,
     rgb(63, 118, 245) 100%
   );
   color: #fff;
@@ -118,7 +118,7 @@ h4 {
 }
 
 .todo-input.edit {
-  border: 2px solid #149fff;
+  border: 2px solid rgb(111, 158, 239);
 }
 
 .todo-button.edit {
@@ -136,12 +136,12 @@ h4 {
   position: relative;
 }
 
-.todo-row {
+.todo-row-plain {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 4px auto;
-  color: #fff;
+  color: black;
   /* background: linear-gradient(
     90deg,
     rgb(207, 138, 89) 0%,
@@ -150,6 +150,20 @@ h4 {
   padding: 16px;
   border-radius: 5px;
   width: 90%;
+  height: 30px;
+  border: 1px solid black;
+}
+
+.todo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px auto;
+  color: #fff;
+  padding: 16px;
+  border-radius: 5px;
+  width: 90%;
+  height: 40px;
 }
 
 .todo-row:nth-child(4n + 1) {

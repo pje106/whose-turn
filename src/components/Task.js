@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import TaskForm from "./TaskForm";
-import {
-  MdOutlineDeleteOutline,
-  MdOutlinePlaylistAddCheck,
-} from "react-icons/md";
-import { TiPen } from "react-icons/ti";
+// import {
+//   MdOutlineDeleteOutline,
+//   MdOutlinePlaylistAddCheck,
+// } from "react-icons/md";
+// import { TiPen } from "react-icons/ti";
 
 const Task = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   const [edit, setEdit] = useState({
@@ -27,11 +27,14 @@ const Task = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   return todos.map((todo, index) => (
     <>
       <div
-        className={todo.isComplete ? "todo-row complete" : "todo-row"}
+        className={
+          todo.isComplete ? "todo-row-plain complete" : "todo-row-plain"
+        }
         key={index}
       >
         <div key={todo.id}>{todo.text}</div>
-        <div className="icons">
+        <div>{todo.id}</div>
+        {/* <div className="icons">
           <MdOutlinePlaylistAddCheck
             onClick={() => completeTodo(todo.id)}
             className="complete-icon"
@@ -44,7 +47,7 @@ const Task = ({ todos, completeTodo, removeTodo, updateTodo }) => {
             onClick={() => removeTodo(todo.id)}
             className="delete-icon"
           />
-        </div>
+        </div> */}
       </div>
     </>
   ));

@@ -5,7 +5,6 @@ import {
   // query,
   // getDocs,
   onSnapshot,
-  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -69,6 +68,7 @@ function TaskForm(props) {
   };
 
   console.log(inputs);
+
   return (
     <>
       <form onSubmit={handleSubmit} className="todo-form">
