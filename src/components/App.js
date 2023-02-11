@@ -58,7 +58,7 @@ const App = () => {
               >
                 <div className="w-100">
                   <PrivateRoute path="/addTask" component={TaskList} />
-                  <PrivateRoute path="/tasks" component={ReadTasks} />
+                  {/* <PrivateRoute path="/tasks" component={ReadTasks} /> */}
                   <PrivateRoute path="/calendar" component={Calendar} />
                   <PrivateRoute exact path="/" component={Dashboard} />
                   <PrivateRoute

@@ -50,18 +50,18 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
         {tasks
           // .filter((task) => task.text.trim().length > 0)
           // .filter((task) => task.creatorId === currentUser.uid)
-          .filter(
-            (task) =>
-              typeof task === "object" &&
-              typeof task.text === "string" &&
-              task.text.trim().length > 0
-          )
-          // .filter((task) => task.creatorId === currentUser.uid)
+          // .filter(
+          //   (task) =>
+          //     typeof task === "object" &&
+          //     typeof task.text === "string" &&
+          //     task.text.trim().length > 0
+          // )
+          .filter((task) => task.creatorId === currentUser.uid)
           .map((task) => {
             return (
               <div className="todo-row" key={task.id}>
                 <div>{task.text}</div>
-
+                {task.fileURL && <img src={task.fileURL} width="50px" alt="" />}
                 <div>by {task.name}</div>
                 {/* <div>{new Date(task.createdAt).toLocaleDateString()}</div> */}
                 <div className="icons">
