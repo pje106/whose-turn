@@ -32,8 +32,8 @@ const Task = ({ todos, completeTodo, removeTodo, updateTodo }) => {
         }
         key={index}
       >
-        <div key={todo.id}>{todo.text}</div>
-        <div>{todo.id}</div>
+        {/* <div key={todo.id}>{todo.text}</div> */}
+        {/* <div>{todo.id}</div> */}
         {/* <div className="icons">
           <MdOutlinePlaylistAddCheck
             onClick={() => completeTodo(todo.id)}

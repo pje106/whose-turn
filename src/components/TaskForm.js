@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import {
   collection,
   addDoc,
@@ -6,12 +8,13 @@ import {
   // getDocs,
   onSnapshot,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 
 function TaskForm(props) {
   const [input, setInput] = useState("");
   const [inputs, setInputs] = useState([]);
+  const [attachment, setAttachment] = useState();
   const { currentUser } = useAuth();
   const inputRef = useRef(null);
 
@@ -57,17 +60,49 @@ function TaskForm(props) {
       id: Math.floor(Math.random() * 10000),
       text: input,
     });
-    await addDoc(collection(db, "tasks"), {
+    // const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
+    // const response = ref(storage, "data_url");
+    // const fileRef = storage.ref().child(`${currentUser.uid}/${uuidv4()}`);
+    // const response = await fileRef.putString(attachment, "data_url");
+    const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
+    const response = await uploadString(fileRef, attachment, "data_url");
+    const fileURL = await getDownloadURL(response.ref);
+    console.log(fileURL);
+    const taskObj = {
       text: input,
+      createdAt: Date.now(), //only this one can convert to date in ReadTasks
       creatorId: currentUser.uid,
       name: currentUser.displayName,
-      //createdTRange: serverTimestamp(),
-      createdAt: Date.now(), //only this one can convert to date in ReadTasks
-    });
+      fileURL,
+    };
+
+    await addDoc(collection(db, "tasks"), taskObj);
     setInput("");
-  };
+    setAttachment("");
+    //   text: input,
+    //   creatorId: currentUser.uid,
+    //   name: currentUser.displayName,
+    //   //createdTRange: serverTimestamp(),
+    //   createdAt: Date.now(), //only this one can convert to date in ReadTasks
+  }; // });
 
   console.log(inputs);
+  const onFileChange = (event) => {
+    const {
+      target: { files },
+    } = event;
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      // console.log(finishedEvent);
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
+    };
+    reader.readAsDataURL(theFile);
+  };
+  const onClearAttachmentClick = () => setAttachment(null);
 
   return (
     <>
@@ -89,16 +124,24 @@ function TaskForm(props) {
         ) : (
           <>
             <input
-              placeholder="Add a todo"
+              placeholder="what's something on your mind?"
               value={input}
               onChange={handleChange}
               name="text"
               className="todo-input"
               ref={inputRef}
+              maxLength={140}
             />
             <button onClick={handleSubmit} className="todo-button">
-              Add ToDo
+              Post it
             </button>
+            <input type="file" accept="image/*" onChange={onFileChange} />
+            {attachment && (
+              <div>
+                <img src={attachment} height="200px" alt="" />
+                <button onClick={onClearAttachmentClick}>Clear</button>
+              </div>
+            )}
           </>
         )}
       </form>

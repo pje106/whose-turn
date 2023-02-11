@@ -10,9 +10,10 @@ import { TiPen } from "react-icons/ti";
 import TaskForm from "./TaskForm";
 import { useAuth } from "../contexts/AuthContext";
 
-function ReadTasks(todos, completeTodo, removeTodo, updateTodo) {
+function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
   const [tasks, setTasks] = useState([]);
   const { currentUser } = useAuth();
+
   // the useEffect hook is used to listen for changes in the tasks collection in the Firebase database. Whenever the collection is updated, the onSnapshot method is triggered, which updates the state of the tasks array. The input form allows users to add new tasks to the collection, and the updated tasks are displayed in the UI.
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "tasks"), (snapshot) => {
@@ -43,17 +44,25 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo) {
 
   return (
     <>
-      <h3 style={{ textAlign: "center" }}>ToDo List</h3>
+      {/* <h3 style={{ textAlign: "center" }}>ToDo List</h3> */}
       <div className="list-contain">
         {/* using filter method only read the data length greater than 0 */}
         {tasks
-          .filter((task) => task.text.trim().length > 0)
-          .filter((task) => task.creatorId === currentUser.uid)
+          // .filter((task) => task.text.trim().length > 0)
+          // .filter((task) => task.creatorId === currentUser.uid)
+          .filter(
+            (task) =>
+              typeof task === "object" &&
+              typeof task.text === "string" &&
+              task.text.trim().length > 0
+          )
+          // .filter((task) => task.creatorId === currentUser.uid)
           .map((task) => {
             return (
               <div className="todo-row" key={task.id}>
                 <div>{task.text}</div>
-                {/* <div>by {task.name}</div> */}
+
+                <div>by {task.name}</div>
                 {/* <div>{new Date(task.createdAt).toLocaleDateString()}</div> */}
                 <div className="icons">
                   <MdOutlinePlaylistAddCheck

@@ -50,21 +50,22 @@ function TaskList() {
 
   return (
     <>
-      <h4>
-        Welcome! <strong>{currentUser.displayName}</strong>
-      </h4>
-      <TaskForm onSubmit={addTodo} />
-      {/* <Link style={{ textDecoration: "none" }} to="/tasks"> */}
-      <Task
-        todos={todos}
-        // completeTodo={completeTodo}
-        // removeTodo={removeTodo}
-        // updateTodo={updateTodo}
-      />
+      <div className="form-container">
+        <h4>
+          Welcome! <strong>{currentUser.displayName}</strong>
+        </h4>
+        <TaskForm onSubmit={addTodo} />
+        {/* <Link style={{ textDecoration: "none" }} to="/tasks"> */}
+      </div>
+
+      <Task todos={todos} />
       <ReadTasks
         completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
+        // key={todos.id}
+        // todoObj={todos}
+        // isOwner={todos.creatorId === currentUser.uid}
       />
       {/* </Link> */}
     </>

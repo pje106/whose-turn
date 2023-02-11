@@ -55,6 +55,8 @@
     90deg,
     rgba(48, 16, 255, 1) 0%,
     rgba(100, 115, 255, 1) 100%
+     border: 1px solid pink;
+  background-color: #fff;
   );
 } */
 
@@ -136,23 +138,23 @@ h4 {
   position: relative;
 }
 
-.todo-row-plain {
+/* .todo-row-plain {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 4px auto;
   color: black;
-  /* background: linear-gradient(
+  background: linear-gradient(
     90deg,
     rgb(207, 138, 89) 0%,
     rgb(248, 145, 104) 100%
-  ); */
+  );
   padding: 16px;
   border-radius: 5px;
   width: 90%;
   height: 30px;
   border: 1px solid black;
-}
+} */
 
 .todo-row {
   display: flex;
@@ -219,5 +221,11 @@ h4 {
   max-width: 100%;
   max-height: 600px;
   overflow: scroll;
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
+  background-color: #fff;
 }
+
+/* .form-container {
+  border: 0.5px solid lightgrey;
+  background-color: #fff;
+} */

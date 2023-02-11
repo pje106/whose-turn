@@ -108,7 +108,7 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              ToDo
+              Secret Daily
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
