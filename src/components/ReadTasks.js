@@ -61,7 +61,7 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
             return (
               <div className="todo-row" key={task.id}>
                 <div>{task.text}</div>
-                {task.fileURL && <img src={task.fileURL} width="50px" alt="" />}
+                {task.fileURL && <img src={task.fileURL}  height="50px" alt="" />}
                 <div>by {task.name}</div>
                 {/* <div>{new Date(task.createdAt).toLocaleDateString()}</div> */}
                 <div className="icons">

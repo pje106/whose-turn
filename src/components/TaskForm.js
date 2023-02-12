@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   collection,
   addDoc,
@@ -54,20 +55,18 @@ function TaskForm(props) {
     setInput(value);
   };
 
-  const handleSubmit = async (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      text: input,
-    });
-    // const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
-    // const response = ref(storage, "data_url");
-    // const fileRef = storage.ref().child(`${currentUser.uid}/${uuidv4()}`);
-    // const response = await fileRef.putString(attachment, "data_url");
-    const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
-    const response = await uploadString(fileRef, attachment, "data_url");
-    const fileURL = await getDownloadURL(response.ref);
-    console.log(fileURL);
+    let fileURL = "";
+    if (input === "") {
+      return;
+    }
+    if (attachment !== "") {
+      const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
+      const response = await uploadString(fileRef, attachment, "data_url");
+      fileURL = await getDownloadURL(response.ref);
+      console.log(fileURL); 
+    }
     const taskObj = {
       text: input,
       createdAt: Date.now(), //only this one can convert to date in ReadTasks
@@ -75,10 +74,20 @@ function TaskForm(props) {
       name: currentUser.displayName,
       fileURL,
     };
-
     await addDoc(collection(db, "tasks"), taskObj);
-    setInput("");
-    setAttachment("");
+  setInput("");
+  setAttachment("");
+    // props.onSubmit({ 
+    //   id: Math.floor(Math.random() * 10000),
+    //   text: input,
+    // }
+    // );
+    // const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
+    // const response = ref(storage, "data_url");
+    // const fileRef = storage.ref().child(`${currentUser.uid}/${uuidv4()}`);
+    // const response = await fileRef.putString(attachment, "data_url");
+
+    
     //   text: input,
     //   creatorId: currentUser.uid,
     //   name: currentUser.displayName,
@@ -106,7 +115,7 @@ function TaskForm(props) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="todo-form">
+      <form onSubmit={onSubmit} className="todo-form">
         {props.edit ? (
           <>
             <input
@@ -117,7 +126,7 @@ function TaskForm(props) {
               ref={inputRef}
               className="todo-input edit"
             />
-            <button onClick={handleSubmit} className="todo-button edit">
+            <button onClick={onSubmit} className="todo-button edit">
               Update
             </button>
           </>
@@ -132,9 +141,13 @@ function TaskForm(props) {
               ref={inputRef}
               maxLength={140}
             />
-            <button onClick={handleSubmit} className="todo-button">
+            <button onClick={onSubmit} className="todo-button">
               Post it
             </button>
+            <label for="attach-file" className="factoryInput__label">
+        
+        
+      </label>
             <input type="file" accept="image/*" onChange={onFileChange} />
             {attachment && (
               <div>
