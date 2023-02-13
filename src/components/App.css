@@ -85,6 +85,12 @@ h4 {
   opacity: 0.5;
 }
 
+.taskForm__attachment{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .todo-form {
   margin-left: 23px;
   margin-bottom: 32px;
@@ -171,7 +177,7 @@ h4 {
   margin-bottom: 20px;
   background-color: white;
   width: 100%;
-  max-width: 320px;
+  max-width: 420px;
   padding: 10px 20px;
   border-radius: 10px;
   position: relative;
@@ -220,12 +226,13 @@ h4 {
 }
 
 .delete-icon {
-  color: #fff;
+  color: #393E46;
 }
 
 .edit-icon {
   margin-left: 10px;
   margin-right: 10px;
+  color: #393E46;
 }
 
 .list-contain {

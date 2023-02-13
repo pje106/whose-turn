@@ -4,6 +4,8 @@ import Task from "./Task";
 import ReadTasks from "./ReadTasks";
 //import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 function TaskList() {
   const [todos, setTodos] = useState([]);
@@ -60,7 +62,7 @@ function TaskList() {
 
       <Task todos={todos} />
       <ReadTasks
-        completeTodo={completeTodo}
+        // completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
         // key={todos.id}

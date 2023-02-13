@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import {
   collection,
   addDoc,
@@ -11,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
+import "./App.css";
 
 function TaskForm(props) {
   const [input, setInput] = useState("");
@@ -48,7 +50,7 @@ function TaskForm(props) {
     inputRef.current.focus();
   });
 
-  const handleChange = (event) => {
+  const onChange = (event) => {
     const {
       target: { value },
     } = event;
@@ -75,8 +77,11 @@ function TaskForm(props) {
       fileURL,
     };
     await addDoc(collection(db, "tasks"), taskObj);
-  setInput("");
-  setAttachment("");
+    setInput("");
+    setAttachment("");
+  };
+
+  
     // props.onSubmit({ 
     //   id: Math.floor(Math.random() * 10000),
     //   text: input,
@@ -93,8 +98,7 @@ function TaskForm(props) {
     //   name: currentUser.displayName,
     //   //createdTRange: serverTimestamp(),
     //   createdAt: Date.now(), //only this one can convert to date in ReadTasks
-  }; // });
-
+ 
   console.log(inputs);
   const onFileChange = (event) => {
     const {
@@ -121,8 +125,8 @@ function TaskForm(props) {
             <input
               placeholder="Update your item"
               value={input}
-              onChange={handleChange}
-              name="text"
+              onChange={onChange}
+              type="text"
               ref={inputRef}
               className="todo-input edit"
             />
@@ -135,7 +139,7 @@ function TaskForm(props) {
             <input
               placeholder="what's something on your mind?"
               value={input}
-              onChange={handleChange}
+              onChange={onChange}
               name="text"
               className="todo-input"
               ref={inputRef}
@@ -150,11 +154,19 @@ function TaskForm(props) {
       </label>
             <input type="file" accept="image/*" onChange={onFileChange} />
             {attachment && (
-              <div>
+              <div className="taskForm__attachment">
                 <img src={attachment} height="200px" alt="" />
                 <button onClick={onClearAttachmentClick}>Clear</button>
+                {/* <FontAwesomeIcon icon={faTimes} /> */}
               </div>
             )}
+        
+            {/* <section>
+                    <h4>What day?</h4>
+                    <div>
+                      <input type="date"/>
+                    </div>
+                  </section> */}
           </>
         )}
       </form>
