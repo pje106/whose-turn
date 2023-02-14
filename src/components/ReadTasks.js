@@ -13,6 +13,7 @@ import { useAuth } from "../contexts/AuthContext";
 function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
   const [tasks, setTasks] = useState([]);
   const { currentUser } = useAuth();
+  const [isImageVisible, setIsImageVisible] = useState(false);
 
   // the useEffect hook is used to listen for changes in the tasks collection in the Firebase database. Whenever the collection is updated, the onSnapshot method is triggered, which updates the state of the tasks array. The input form allows users to add new tasks to the collection, and the updated tasks are displayed in the UI.
   useEffect(() => {
@@ -61,7 +62,15 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
             return (
               <div className="todo-row" key={task.id}>
                 <div>{task.text}</div>
-                {task.fileURL && <img src={task.fileURL}  height="50px" alt="" />}
+                <div className="img-wrapper">
+                  {task.fileURL && (
+                    <img
+                      className="hover-zoom"
+                      src={task.fileURL}
+                      alt="postImg"
+                    />
+                  )}
+                </div>
                 <div>by {task.name}</div>
                 {/* <div>{new Date(task.createdAt).toLocaleDateString()}</div> */}
                 <div className="icons">

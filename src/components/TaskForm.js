@@ -43,12 +43,13 @@ function TaskForm(props) {
       }));
       setInputs(taskArray);
     });
+    inputRef.current.focus();
     return unsub;
   }, []);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  });
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // });
 
   const onChange = (event) => {
     const {
@@ -67,7 +68,7 @@ function TaskForm(props) {
       const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
       const response = await uploadString(fileRef, attachment, "data_url");
       fileURL = await getDownloadURL(response.ref);
-      console.log(fileURL); 
+      console.log(fileURL);
     }
     const taskObj = {
       text: input,
@@ -81,24 +82,22 @@ function TaskForm(props) {
     setAttachment("");
   };
 
-  
-    // props.onSubmit({ 
-    //   id: Math.floor(Math.random() * 10000),
-    //   text: input,
-    // }
-    // );
-    // const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
-    // const response = ref(storage, "data_url");
-    // const fileRef = storage.ref().child(`${currentUser.uid}/${uuidv4()}`);
-    // const response = await fileRef.putString(attachment, "data_url");
+  // props.onSubmit({
+  //   id: Math.floor(Math.random() * 10000),
+  //   text: input,
+  // }
+  // );
+  // const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
+  // const response = ref(storage, "data_url");
+  // const fileRef = storage.ref().child(`${currentUser.uid}/${uuidv4()}`);
+  // const response = await fileRef.putString(attachment, "data_url");
 
-    
-    //   text: input,
-    //   creatorId: currentUser.uid,
-    //   name: currentUser.displayName,
-    //   //createdTRange: serverTimestamp(),
-    //   createdAt: Date.now(), //only this one can convert to date in ReadTasks
- 
+  //   text: input,
+  //   creatorId: currentUser.uid,
+  //   name: currentUser.displayName,
+  //   //createdTRange: serverTimestamp(),
+  //   createdAt: Date.now(), //only this one can convert to date in ReadTasks
+
   console.log(inputs);
   const onFileChange = (event) => {
     const {
@@ -136,6 +135,8 @@ function TaskForm(props) {
           </>
         ) : (
           <>
+            {/* <div> */}
+            ✍️ :
             <input
               placeholder="what's something on your mind?"
               value={input}
@@ -145,22 +146,34 @@ function TaskForm(props) {
               ref={inputRef}
               maxLength={140}
             />
+            {/* </div> */}
+            {/* <div>
+              👨‍👩‍👧‍👦 :
+              <input
+                placeholder="who you are?"
+                value={input}
+                onChange={onChange}
+                name="name"
+                className="todo-input"
+                // ref={name}
+                maxLength={140}
+              />
+            </div> */}
             <button onClick={onSubmit} className="todo-button">
               Post it
             </button>
-            <label for="attach-file" className="factoryInput__label">
-        
-        
-      </label>
+            <label
+              htmlFor="attach-file"
+              className="factoryInput__label"
+            ></label>
             <input type="file" accept="image/*" onChange={onFileChange} />
             {attachment && (
               <div className="taskForm__attachment">
-                <img src={attachment} height="200px" alt="" />
+                <img src={attachment} width="300px" alt="" />
                 <button onClick={onClearAttachmentClick}>Clear</button>
                 {/* <FontAwesomeIcon icon={faTimes} /> */}
               </div>
             )}
-        
             {/* <section>
                     <h4>What day?</h4>
                     <div>

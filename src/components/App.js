@@ -34,8 +34,8 @@ const App = () => {
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "100vh",
-          width: "100vw",
+          height: "100%",
+          width: "100%",
         }}
       >
         <Router>
@@ -54,13 +54,13 @@ const App = () => {
               <div
                 // class="container"
                 className="container d-flex align-items-center justify-content-center"
-                style={{ minHeight: "80vh", maxWidth: "500px" }}
+                style={{ minHeight: "100vh", maxWidth: "500px" }}
               >
-                <div className="w-100">
+                <div className="w-100" style={{ minHeight: "80vh" }}>
                   <PrivateRoute path="/addTask" component={TaskList} />
                   {/* <PrivateRoute path="/tasks" component={ReadTasks} /> */}
                   <PrivateRoute path="/calendar" component={Calendar} />
-                  <PrivateRoute exact path="/" component={TaskList} />
+                  <PrivateRoute exact path="/" component={Dashboard} />
                   <PrivateRoute
                     path="/update-profile"
                     component={UpdateProfile}
@@ -74,6 +74,7 @@ const App = () => {
                     element={
                       <PrivateRoute>
                         <TaskList />
+                        <Dashboard />
                       </PrivateRoute>
                     }
                   ></Route>
