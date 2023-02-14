@@ -1,29 +1,29 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
-import {
-  MdOutlineDeleteOutline,
-  MdOutlinePlaylistAddCheck,
-} from "react-icons/md";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { TiPen } from "react-icons/ti";
 import TaskForm from "./TaskForm";
-import { useAuth } from "../contexts/AuthContext";
+import { doc, deleteDoc } from "firebase/firestore";
 
-function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
+function ReadTasks(updateTodo, task) {
   const [tasks, setTasks] = useState([]);
-  const { currentUser } = useAuth();
-  const [isImageVisible, setIsImageVisible] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [newTasks, setNewTasks] = useState(task.text);
 
   // the useEffect hook is used to listen for changes in the tasks collection in the Firebase database. Whenever the collection is updated, the onSnapshot method is triggered, which updates the state of the tasks array. The input form allows users to add new tasks to the collection, and the updated tasks are displayed in the UI.
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "tasks"), (snapshot) => {
-      const taskArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setTasks(taskArray);
-    });
+    const unsub = onSnapshot(
+      query(collection(db, "tasks"), orderBy("createdAt", "desc")),
+      (snapshot) => {
+        const taskArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTasks(taskArray);
+      }
+    );
     return unsub;
   }, []);
 
@@ -43,6 +43,20 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
     return <TaskForm edit={edit} onSubmit={submitUpdate} />;
   }
 
+  const onDeleteClick = async (task) => {
+    const ok = window.confirm("Are you sure you want to delete this task?");
+    console.log(ok);
+    if (ok) {
+      try {
+        await deleteDoc(doc(db, "tasks", task.id));
+      } catch (error) {
+        console.log("Error deleting task: ", error);
+      }
+    }
+  };
+
+  const troggleEditing = () => setEditing((prev) => !prev);
+
   return (
     <>
       {/* <h3 style={{ textAlign: "center" }}>ToDo List</h3> */}
@@ -60,33 +74,29 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
           //.filter((task) => task.creatorId === currentUser.uid)
           .map((task) => {
             return (
-              <div className="todo-row" key={task.id}>
-                <div>{new Date(task.createdAt).toLocaleDateString()}</div>
-
-                <div>{task.text}</div>
-                <div className="img-wrapper">
-                  {task.fileURL && (
-                    <img
-                      className="hover-zoom"
-                      src={task.fileURL}
-                      alt="postImg"
+              <div>
+                <div className="todo-row" key={task.id}>
+                  <div>{new Date(task.createdAt).toLocaleDateString()}</div>
+                  <div>{task.text}</div>
+                  <div className="img-wrapper">
+                    {task.fileURL && (
+                      <img
+                        className="hover-zoom"
+                        src={task.fileURL}
+                        alt="postImg"
+                      />
+                    )}
+                  </div>
+                  <div>by {task.name}</div>
+                  <div className="icons">
+                    {/* <button onClick={() => onDeleteClick(task)}>Delete</button> */}
+                    {/* <button onClick={troggleEditing}>Edit</button> */}
+                    <TiPen onClick={troggleEditing} className="edit-icon" />
+                    <MdOutlineDeleteOutline
+                      onClick={() => onDeleteClick(task)}
+                      className="delete-icon"
                     />
-                  )}
-                </div>
-                <div>by {task.name}</div>
-                <div className="icons">
-                  {/* <MdOutlinePlaylistAddCheck
-                    onClick={() => completeTodo(task.id)}
-                    className="complete-icon"
-                  /> */}
-                  <TiPen
-                    onClick={() => setEdit({ id: task.id, value: task.text })}
-                    className="edit-icon"
-                  />
-                  <MdOutlineDeleteOutline
-                    onClick={() => removeTodo(task.id)}
-                    className="delete-icon"
-                  />
+                  </div>
                 </div>
               </div>
             );

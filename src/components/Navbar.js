@@ -72,19 +72,10 @@ function Navbar() {
     history.push("/addTask");
   };
 
-  const handleCalendarClick = () => {
+  // this function still can not logout
+  const handleLogoutClick = () => {
     handleClose();
-    history.push("/calendar");
-  };
-
-  // const handleLogoutClick = () => {
-  //   handleClose();
-  //   history.push("/login");
-  // };
-
-  const handleCheckTaskClick = () => {
-    handleClose();
-    history.push("/tasks");
+    history.push("/signup");
   };
 
   return (
@@ -97,7 +88,7 @@ function Navbar() {
               variant="h4"
               noWrap
               component="a"
-              href="/tasks#/tasks"
+              href="/addtasks#/addTask"
               sx={{
                 ml: 2,
                 // display: { md: "flex", ml: "2" },
@@ -112,16 +103,6 @@ function Navbar() {
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              {/* <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="false"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton> */}
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -147,25 +128,7 @@ function Navbar() {
                 ))}
               </Menu>
             </Box>
-            {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-            {/* <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 900,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography> */}
+
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
@@ -205,16 +168,9 @@ function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {/* {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))} */}
                 <MenuItem onClick={handleAddTaskClick}>Home</MenuItem>
                 <MenuItem onClick={handleProfileClick}>Account</MenuItem>
-                {/* <MenuItem onClick={handleCheckTaskClick}>Check Task</MenuItem>
-                <MenuItem onClick={handleCalendarClick}>Calendar</MenuItem> */}
-                <MenuItem>Logout</MenuItem>
+                <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
               </Menu>
             </Box>
           </Toolbar>

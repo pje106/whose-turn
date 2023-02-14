@@ -4,7 +4,6 @@ import { AuthContextProvider } from "../contexts/AuthContext";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
-import ReadTasks from "./ReadTasks";
 import Navbar from "./Navbar";
 import Calendar from "./Calendar";
 import PrivateRoute from "./PrivateRoute";
@@ -15,8 +14,6 @@ import "./App.css";
 import { useState } from "react";
 
 const App = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser);
-
   const [backgroundImage, setBackgroundImage] = useState(
     "https://images.pexels.com/photos/2755148/pexels-photo-2755148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   );

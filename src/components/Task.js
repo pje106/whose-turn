@@ -6,7 +6,7 @@ import TaskForm from "./TaskForm";
 // } from "react-icons/md";
 // import { TiPen } from "react-icons/ti";
 
-const Task = ({ todos, completeTodo, removeTodo, updateTodo }) => {
+const Task = ({ todos, updateTodo }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: "",

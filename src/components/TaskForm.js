@@ -13,6 +13,7 @@ import {
 import { db, storage } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import "./App.css";
+import ReadTasks from "./ReadTasks";
 
 function TaskForm(props) {
   const [input, setInput] = useState("");
@@ -135,9 +136,8 @@ function TaskForm(props) {
           </>
         ) : (
           <>
-            {/* <div> */}
             <input
-              placeholder="✍️what's something on your mind?"
+              placeholder="✍️ what's something on your mind?"
               value={input}
               onChange={onChange}
               name="text"
@@ -145,19 +145,6 @@ function TaskForm(props) {
               ref={inputRef}
               maxLength={140}
             />
-            {/* </div> */}
-            {/* <div>
-              👨‍👩‍👧‍👦 :
-              <input
-                placeholder="who you are?"
-                value={input}
-                onChange={onChange}
-                name="name"
-                className="todo-input"
-                // ref={name}
-                maxLength={140}
-              />
-            </div> */}
             <button onClick={onSubmit} className="todo-button">
               Post it
             </button>
@@ -170,15 +157,8 @@ function TaskForm(props) {
               <div className="taskForm__attachment">
                 <img src={attachment} width="300px" alt="" />
                 <button onClick={onClearAttachmentClick}>Clear</button>
-                {/* <FontAwesomeIcon icon={faTimes} /> */}
               </div>
             )}
-            {/* <section>
-                    <h4>What day?</h4>
-                    <div>
-                      <input type="date"/>
-                    </div>
-                  </section> */}
           </>
         )}
       </form>
