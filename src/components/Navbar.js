@@ -108,7 +108,7 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              Family Diary
+              Stay-Close
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -210,11 +210,11 @@ function Navbar() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))} */}
-                <MenuItem onClick={handleProfileClick}>Dashboard</MenuItem>
-                <MenuItem onClick={handleAddTaskClick}>Add Task</MenuItem>
-                <MenuItem onClick={handleCheckTaskClick}>Check Task</MenuItem>
-                <MenuItem onClick={handleCalendarClick}>Calendar</MenuItem>
-                {/* <MenuItem onClick={handleLogout}>Logout</MenuItem> */}
+                <MenuItem onClick={handleAddTaskClick}>Home</MenuItem>
+                <MenuItem onClick={handleProfileClick}>Account</MenuItem>
+                {/* <MenuItem onClick={handleCheckTaskClick}>Check Task</MenuItem>
+                <MenuItem onClick={handleCalendarClick}>Calendar</MenuItem> */}
+                <MenuItem>Logout</MenuItem>
               </Menu>
             </Box>
           </Toolbar>

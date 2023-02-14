@@ -40,8 +40,10 @@ const App = () => {
       >
         <Router>
           <Navbar />
-          <h6>Change the Background Image</h6>
-          <input type="text" onChange={handleChange} />
+          <div>
+            <h6>Change the Background Image</h6>
+            <input type="text" onChange={handleChange} style={{}} />
+          </div>
           <div>
             <audio src="path/to/your/music.mp3" controls={play} />
             <button onClick={() => setPlay(!play)}>

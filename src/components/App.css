@@ -250,5 +250,5 @@ h4 {
   overflow: hidden;
 } */
 img.hover-zoom:hover {
-  transform: scale(2.25) translate(-50%);
+  transform: scale(2.5) translate(-50%);
 }

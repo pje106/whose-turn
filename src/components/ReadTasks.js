@@ -57,10 +57,12 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
           //     typeof task.text === "string" &&
           //     task.text.trim().length > 0
           // )
-          .filter((task) => task.creatorId === currentUser.uid)
+          //.filter((task) => task.creatorId === currentUser.uid)
           .map((task) => {
             return (
               <div className="todo-row" key={task.id}>
+                <div>{new Date(task.createdAt).toLocaleDateString()}</div>
+
                 <div>{task.text}</div>
                 <div className="img-wrapper">
                   {task.fileURL && (
@@ -72,12 +74,11 @@ function ReadTasks(todos, completeTodo, removeTodo, updateTodo, fileURL) {
                   )}
                 </div>
                 <div>by {task.name}</div>
-                {/* <div>{new Date(task.createdAt).toLocaleDateString()}</div> */}
                 <div className="icons">
-                  <MdOutlinePlaylistAddCheck
+                  {/* <MdOutlinePlaylistAddCheck
                     onClick={() => completeTodo(task.id)}
                     className="complete-icon"
-                  />
+                  /> */}
                   <TiPen
                     onClick={() => setEdit({ id: task.id, value: task.text })}
                     className="edit-icon"

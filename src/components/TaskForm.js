@@ -136,9 +136,8 @@ function TaskForm(props) {
         ) : (
           <>
             {/* <div> */}
-            ✍️ :
             <input
-              placeholder="what's something on your mind?"
+              placeholder="✍️what's something on your mind?"
               value={input}
               onChange={onChange}
               name="text"
