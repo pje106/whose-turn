@@ -16,7 +16,7 @@ import { useState } from "react";
 
 const App = () => {
   const [backgroundImage, setBackgroundImage] = useState(
-    "https://i.pinimg.com/736x/50/76/66/5076661b1aca8b085dd989fc3389f5aa.jpg"
+    "https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?size=626&ext=jpg&ga=GA1.2.271233852.1672961310&semt=ais"
   );
 
   const handleChange = (event) => {
@@ -31,8 +31,8 @@ const App = () => {
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "100%",
-          width: "100%",
+          width: '100%',
+    
         }}
       >
         <Router>
