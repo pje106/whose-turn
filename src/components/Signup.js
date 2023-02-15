@@ -2,15 +2,8 @@ import React, { useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-// import userEvent from "@testing-library/user-event";
-// import { updateCurrentUser } from "firebase/auth";
-//import { auth} from "../firebase";
 
 export default function Signup() {
-  // const emailRef = useRef();
-  // const passwordRef = useRef();
-  // const passwordConfirmRef = useRef();
-
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");

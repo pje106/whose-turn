@@ -2,63 +2,13 @@
   text-align: center;
 }
 
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 * {
-  /* border: 2px solid #3378e8; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
-
-/* body {
-  background: linear-gradient(
-    90deg,
-    rgba(48, 16, 255, 1) 0%,
-    rgba(100, 115, 255, 1) 100%
-     border: 1px solid pink;
-  background-color: #fff;
-  );
-} */
 
 .todo-app {
   display: flex;
@@ -75,7 +25,6 @@
 
 h4 {
   margin-left: 23px;
-  /* margin: 32px 0; */
   color: black;
   font-size: 24px;
 }
@@ -123,7 +72,6 @@ h4 {
   );
   color: #fff;
   text-transform: capitalize;
-  /* margin-left: 150px; */
 }
 
 .todo-input.edit {
@@ -147,34 +95,7 @@ h4 {
   position: relative;
 }
 
-/* .todo-row-plain {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 4px auto;
-  color: black;
-  background: linear-gradient(
-    90deg,
-    rgb(207, 138, 89) 0%,
-    rgb(248, 145, 104) 100%
-  );
-  padding: 16px;
-  border-radius: 5px;
-  width: 90%;
-  height: 30px;
-  border: 1px solid black;
-} */
-
 .todo-row {
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px auto;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  width: 100%;
-  height: 40px; */
   box-sizing: border-box;
   margin-bottom: 20px;
   background-color: white;
@@ -206,7 +127,6 @@ h4 {
 }
 
 .icons {
-  /* display: list-item; */
   margin-top: auto;
   align-items: center;
   font-size: 25px;
@@ -228,15 +148,9 @@ h4 {
   max-width: 100%;
   max-height: 600px;
   overflow: scroll;
-  /* border: 1px solid pink; */
   background-color: #fff;
   padding: 20px;
 }
-
-/* .form-container {
-  border: 0.5px solid lightgrey;
-  background-color: #fff;
-} */
 
 .todo-row img {
   right: 0;
@@ -248,9 +162,6 @@ h4 {
   margin-top: 10px;
 }
 
-/* .img-wrapper {
-  overflow: hidden;
-} */
 img.hover-zoom:hover {
   transform: scale(2.5) translate(-50%);
 }

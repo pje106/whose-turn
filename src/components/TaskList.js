@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import TaskForm from "./TaskForm";
-//import Task from "./Task";
 import ReadTasks from "./ReadTasks";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -36,14 +35,7 @@ function TaskList() {
         </h4>
         <TaskForm onSubmit={addTodo} />
       </div>
-
-      {/* <Task todos={todos} /> */}
-      <ReadTasks
-      // updateTodo={updateTodo}
-      // task={selectedTask}
-      // removeTodo={removeTodo}
-      // updateTodo={updateTodo}
-      />
+      <ReadTasks />
     </>
   );
 }

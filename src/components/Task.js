@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import TaskForm from "./TaskForm";
-// import {
-//   MdOutlineDeleteOutline,
-//   MdOutlinePlaylistAddCheck,
-// } from "react-icons/md";
-// import { TiPen } from "react-icons/ti";
 
 const Task = ({ todos, updateTodo }) => {
   const [edit, setEdit] = useState({
@@ -31,24 +26,7 @@ const Task = ({ todos, updateTodo }) => {
           todo.isComplete ? "todo-row-plain complete" : "todo-row-plain"
         }
         key={index}
-      >
-        {/* <div key={todo.id}>{todo.text}</div> */}
-        {/* <div>{todo.id}</div> */}
-        {/* <div className="icons">
-          <MdOutlinePlaylistAddCheck
-            onClick={() => completeTodo(todo.id)}
-            className="complete-icon"
-          />
-          <TiPen
-            onClick={() => setEdit({ id: todo.id, value: todo.text })}
-            className="edit-icon"
-          />
-          <MdOutlineDeleteOutline
-            onClick={() => removeTodo(todo.id)}
-            className="delete-icon"
-          />
-        </div> */}
-      </div>
+      ></div>
     </>
   ));
 };

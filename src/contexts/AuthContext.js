@@ -9,7 +9,6 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 
-// const AuthContext = React.createContext();
 const AuthContext = createContext();
 export { AuthContext };
 export function useAuth() {
@@ -19,10 +18,6 @@ export function useAuth() {
 export function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-
-  // function signup(email, password) {
-  //   return createUserWithEmailAndPassword(auth, email, password);
-  // }
 
   async function signup(email, password, displayName) {
     if (displayName.length === 0) {
@@ -61,23 +56,10 @@ export function AuthContextProvider({ children }) {
     return updatePassword(currentUser, password);
   }
 
-  // const [userObj, setUserObj] = useState(null);
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       setLoading(true);
-  //       setUserObj(user);
-  //     } else {
-  //       setLoading(false);
-  //     }
-  //     return unsubscribe;
-  //   });
-  // }, []);
-  // const [userObj, setUserObj] = useState(null);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      // setUserObj(user);
+
       setLoading(false);
     });
     return unsubscribe;

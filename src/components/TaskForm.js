@@ -22,19 +22,6 @@ function TaskForm(props) {
   const { currentUser } = useAuth();
   const inputRef = useRef(null);
 
-  // const getTasks = async () => {
-  //   const q = query(collection(db, "tasks").orderBy("createdAt", "desc"));
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     const taskObj = {
-  //       ...doc.data(),
-  //       id: doc.id,
-  //     };
-  //     setInputs((prev) => [taskObj, ...prev]);
-  //     console.log(taskObj);
-  //   });
-  // };
-
   useEffect(() => {
     // getTasks();
     const unsub = onSnapshot(collection(db, "tasks"), (snapshot) => {
@@ -48,9 +35,6 @@ function TaskForm(props) {
     return unsub;
   }, []);
 
-  // useEffect(() => {
-  //   inputRef.current.focus();
-  // });
 
   const onChange = (event) => {
     const {

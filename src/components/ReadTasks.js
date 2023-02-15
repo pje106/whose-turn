@@ -97,7 +97,6 @@ function ReadTasks() {
                       fontFamily: "Comic Sans MS",
                       fontSize: "16px",
                       textdecoration: "underline",
-                      // fontWeight: "bold",
                       maxWidth: "330px",
                     }}
                   >
@@ -114,8 +113,6 @@ function ReadTasks() {
                   </div>
                   <div>by {task.name}</div>
                   <div className="icons">
-                    {/* <button onClick={() => onDeleteClick(task)}>Delete</button> */}
-                    {/* <button onClick={() => toggleEditing(task)}>Edit</button> */}
                     <TiPen
                       onClick={() => toggleEditing(task)}
                       className="edit-icon"

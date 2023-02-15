@@ -1,21 +1,3 @@
-// import { Link, useMatch, useResolvedPath } from "react-router-dom";
-// import img1 from "../images/logo.png";
-
-// export default function Navbar() {
-//   return (
-//     <nav className="nav">
-//       <ul>
-//         <Link to="/" className="whose-turn">
-//           <img src={img1} alt="Logo" />
-//           Whose Turn
-//         </Link>
-//         <Link to="/login">log in</Link>
-//         <Link to="/tasks">tasks</Link>
-//       </ul>
-//     </nav>
-//   );
-// }
-
 import { useHistory } from "react-router-dom";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
@@ -32,19 +14,12 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { deepPurple } from "@mui/material/colors";
 
-// import { Logout } from "@mui/icons-material";
-// import MenuIcon from "@mui/icons-material/Menu";
-
 const pages = [];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const history = useHistory();
-
-  // const handleOpenNavMenu = (event) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -91,7 +66,6 @@ function Navbar() {
               href="/addtasks#/addTask"
               sx={{
                 ml: 2,
-                // display: { md: "flex", ml: "2" },
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",

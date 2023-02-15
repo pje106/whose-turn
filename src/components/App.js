@@ -23,8 +23,6 @@ const App = () => {
     setBackgroundImage(event.target.value);
   };
 
-  // const [play, setPlay] = useState(false);
-
   return (
     <>
       <div
@@ -42,9 +40,6 @@ const App = () => {
             <h6>Change the Background Image</h6>
             <input type="text" onChange={handleChange} style={{}} />
           </div>
-          {/* <div>
-            <MusicPlayer />
-          </div> */}
 
           <AuthContextProvider>
             <Switch>
@@ -55,7 +50,6 @@ const App = () => {
               >
                 <div className="w-100" style={{ minHeight: "80vh" }}>
                   <PrivateRoute path="/addTask" component={TaskList} />
-                  {/* <PrivateRoute path="/tasks" component={ReadTasks} /> */}
                   <PrivateRoute path="/calendar" component={Calendar} />
                   <PrivateRoute exact path="/" component={Dashboard} />
                   <PrivateRoute
@@ -86,8 +80,3 @@ const App = () => {
 };
 
 export default App;
-// export default function PrivateRoute({ children }) {
-//   const { currentUser } = useAuth();
-
-//   return currentUser ? children : <Navigate to="/login" />;
-// }
