@@ -9,7 +9,7 @@ function TaskList() {
 
   const addTodo = (todo) => {
     if (todo.text.length === 0) {
-      window.alert("Please enter a value for the todo item.");
+      window.alert("You haven't enter anything");
     }
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
