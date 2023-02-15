@@ -95,7 +95,7 @@ function ReadTasks() {
                   <div
                     style={{
                       fontFamily: "Comic Sans MS",
-                      fontSize: "16px",
+                      fontSize: "24px",
                       textdecoration: "underline",
                       maxWidth: "330px",
                     }}
@@ -111,7 +111,7 @@ function ReadTasks() {
                       />
                     )}
                   </div>
-                  <div>by {task.name}</div>
+                  <div style={{marginTop:"50px"}}>by {task.name}</div>
                   <div className="icons">
                     <TiPen
                       onClick={() => toggleEditing(task)}

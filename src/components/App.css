@@ -10,7 +10,7 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
-.backgroudImage{
+.backgroudImage {
   padding: 20px;
 }
 
@@ -51,8 +51,8 @@ h4 {
 
 .todo-input {
   padding: 14px 32px 14px 16px;
-  border-radius: 10px 10px;
-  border: 2px solid #3378e8;
+  border-radius: 10px 0 0 10px;
+  border: 2px solid #1976d2;
   outline: none;
   width: 320px;
   background: white;
@@ -69,11 +69,7 @@ h4 {
   border-radius: 0 4px 4px 0;
   cursor: pointer;
   outline: none;
-  background: linear-gradient(
-    80deg,
-    rgb(113, 125, 236) 0%,
-    rgb(63, 118, 245) 100%
-  );
+  background: #1976d2;
   color: #fff;
   text-transform: capitalize;
 }
@@ -142,7 +138,6 @@ h4 {
 }
 
 .edit-icon {
-  margin-left: 10px;
   margin-right: 10px;
   color: #393e46;
 }
@@ -157,13 +152,13 @@ h4 {
 }
 
 .todo-row img {
-  right: 0;
+  right: -15px;
   top: 0;
   position: absolute;
   border-radius: 50%;
   width: 80px;
   height: 80px;
-  margin-top: 10px;
+  margin-top: 50px;
 }
 
 img.hover-zoom:hover {

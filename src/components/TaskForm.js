@@ -1,19 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
-import {
-  collection,
-  addDoc,
-  // query,
-  // getDocs,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import "./App.css";
-import ReadTasks from "./ReadTasks";
 
 function TaskForm(props) {
   const [input, setInput] = useState("");
@@ -23,7 +14,6 @@ function TaskForm(props) {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    // getTasks();
     const unsub = onSnapshot(collection(db, "tasks"), (snapshot) => {
       const taskArray = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -34,7 +24,6 @@ function TaskForm(props) {
     inputRef.current.focus();
     return unsub;
   }, []);
-
 
   const onChange = (event) => {
     const {
@@ -85,7 +74,6 @@ function TaskForm(props) {
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
-      // console.log(finishedEvent);
       const {
         currentTarget: { result },
       } = finishedEvent;
