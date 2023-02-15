@@ -16,12 +16,13 @@ import { useState } from "react";
 
 const App = () => {
   const [backgroundImage, setBackgroundImage] = useState(
-    "https://images.pexels.com/photos/2755148/pexels-photo-2755148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    "https://i.pinimg.com/736x/50/76/66/5076661b1aca8b085dd989fc3389f5aa.jpg"
   );
 
   const handleChange = (event) => {
     setBackgroundImage(event.target.value);
   };
+
 
   return (
     <>
@@ -36,7 +37,7 @@ const App = () => {
       >
         <Router>
           <Navbar />
-          <div>
+          <div  className="backgroudImage">
             <h6>Change the Background Image</h6>
             <input type="text" onChange={handleChange} style={{}} />
           </div>

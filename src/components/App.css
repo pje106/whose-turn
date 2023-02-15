@@ -10,6 +10,10 @@
     "Lucida Sans", Arial, sans-serif;
 }
 
+.backgroudImage{
+  padding: 20px;
+}
+
 .todo-app {
   display: flex;
   flex-direction: column;
@@ -51,7 +55,7 @@ h4 {
   border: 2px solid #3378e8;
   outline: none;
   width: 320px;
-  background: transparent;
+  background: white;
   color: black;
 }
 
