@@ -12,6 +12,7 @@ import UpdateProfile from "./UpdateProfile";
 import TaskList from "./TaskList";
 import "./App.css";
 import { useState } from "react";
+//import MusicPlayer from "./MusicPlayer";
 
 const App = () => {
   const [backgroundImage, setBackgroundImage] = useState(
@@ -22,7 +23,7 @@ const App = () => {
     setBackgroundImage(event.target.value);
   };
 
-  const [play, setPlay] = useState(false);
+  // const [play, setPlay] = useState(false);
 
   return (
     <>
@@ -41,12 +42,9 @@ const App = () => {
             <h6>Change the Background Image</h6>
             <input type="text" onChange={handleChange} style={{}} />
           </div>
-          <div>
-            <audio src="path/to/your/music.mp3" controls={play} />
-            <button onClick={() => setPlay(!play)}>
-              {play ? "Pause" : "Play"}
-            </button>
-          </div>
+          {/* <div>
+            <MusicPlayer />
+          </div> */}
 
           <AuthContextProvider>
             <Switch>

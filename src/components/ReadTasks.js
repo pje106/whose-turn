@@ -4,13 +4,13 @@ import { db } from "../firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { TiPen } from "react-icons/ti";
-import TaskForm from "./TaskForm";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 
-function ReadTasks(updateTodo, task) {
+function ReadTasks() {
   const [tasks, setTasks] = useState([]);
   const [editing, setEditing] = useState(false);
-  const [newTasks, setNewTasks] = useState(task.text);
+  const [newTasks, setNewTasks] = useState(tasks.text);
+  const [editingTask, setEditingTask] = useState(null);
 
   // the useEffect hook is used to listen for changes in the tasks collection in the Firebase database. Whenever the collection is updated, the onSnapshot method is triggered, which updates the state of the tasks array. The input form allows users to add new tasks to the collection, and the updated tasks are displayed in the UI.
   useEffect(() => {
@@ -27,57 +27,82 @@ function ReadTasks(updateTodo, task) {
     return unsub;
   }, []);
 
-  const [edit, setEdit] = useState({
-    id: null,
-    value: "",
-  });
-
-  const submitUpdate = (value) => {
-    updateTodo(edit.id, value);
-    setEdit({
-      id: null,
-      value: "",
-    });
-  };
-  if (edit.id) {
-    return <TaskForm edit={edit} onSubmit={submitUpdate} />;
-  }
-
   const onDeleteClick = async (task) => {
     const ok = window.confirm("Are you sure you want to delete this task?");
     console.log(ok);
     if (ok) {
       try {
-        await deleteDoc(doc(db, "tasks", task.id));
+        const taskRef = doc(db, "tasks", task.id);
+        await deleteDoc(taskRef);
       } catch (error) {
         console.log("Error deleting task: ", error);
       }
     }
   };
 
-  const troggleEditing = () => setEditing((prev) => !prev);
+  const toggleEditing = (task) => {
+    setEditingTask(task);
+    setNewTasks(task.text);
+    setEditing((prev) => !prev);
+  };
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    await updateDoc(doc(db, "tasks", editingTask.id), {
+      text: newTasks,
+    });
+    setEditing(false);
+    setEditingTask(null);
+  };
+
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setNewTasks(value);
+  };
 
   return (
-    <>
-      {/* <h3 style={{ textAlign: "center" }}>ToDo List</h3> */}
-      <div className="list-contain">
-        {/* using filter method only read the data length greater than 0 */}
-        {tasks
-          // .filter((task) => task.text.trim().length > 0)
-          // .filter((task) => task.creatorId === currentUser.uid)
-          // .filter(
-          //   (task) =>
-          //     typeof task === "object" &&
-          //     typeof task.text === "string" &&
-          //     task.text.trim().length > 0
-          // )
-          //.filter((task) => task.creatorId === currentUser.uid)
-          .map((task) => {
-            return (
-              <div>
+    <div>
+      {editing ? (
+        <>
+          <form onSubmit={onSubmit}>
+            <input
+              type="text"
+              placeholder="Edit your message"
+              value={newTasks}
+              required
+              onChange={onChange}
+            />
+            <input type="submit" value="Update message" />
+          </form>
+          <button onClick={toggleEditing}>Cancel</button>
+        </>
+      ) : (
+        <div className="list-contain">
+          {tasks
+            // .filter((task) => task.text.trim().length > 0)
+            // .filter((task) => task.creatorId === currentUser.uid)
+            //.filter((task) => task.creatorId === currentUser.uid)
+            .map((task) => {
+              return (
                 <div className="todo-row" key={task.id}>
-                  <div>{new Date(task.createdAt).toLocaleDateString()}</div>
-                  <div>{task.text}</div>
+                  <div>
+                    <strong>
+                      {new Date(task.createdAt).toLocaleDateString()}
+                    </strong>
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "Comic Sans MS",
+                      fontSize: "16px",
+                      textdecoration: "underline",
+                      // fontWeight: "bold",
+                      maxWidth: "330px",
+                    }}
+                  >
+                    {task.text}
+                  </div>
                   <div className="img-wrapper">
                     {task.fileURL && (
                       <img
@@ -90,20 +115,22 @@ function ReadTasks(updateTodo, task) {
                   <div>by {task.name}</div>
                   <div className="icons">
                     {/* <button onClick={() => onDeleteClick(task)}>Delete</button> */}
-                    {/* <button onClick={troggleEditing}>Edit</button> */}
-                    <TiPen onClick={troggleEditing} className="edit-icon" />
+                    {/* <button onClick={() => toggleEditing(task)}>Edit</button> */}
+                    <TiPen
+                      onClick={() => toggleEditing(task)}
+                      className="edit-icon"
+                    />
                     <MdOutlineDeleteOutline
                       onClick={() => onDeleteClick(task)}
                       className="delete-icon"
                     />
                   </div>
                 </div>
-              </div>
-            );
-          })}
-      </div>
-    </>
+              );
+            })}
+        </div>
+      )}
+    </div>
   );
 }
-//new Date(task.createdAt).toUTCString()
 export default ReadTasks;

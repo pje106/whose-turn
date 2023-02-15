@@ -61,6 +61,16 @@ function TaskForm(props) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    if (input.length > 140) {
+      alert("Please enter no more than 140 characters");
+      return;
+    }
+    props.onSubmit({
+      id: Math.floor(Math.random() * 10000),
+      text: input,
+    });
+    setInput("");
+
     let fileURL = "";
     if (input === "") {
       return;
@@ -82,22 +92,6 @@ function TaskForm(props) {
     setInput("");
     setAttachment("");
   };
-
-  // props.onSubmit({
-  //   id: Math.floor(Math.random() * 10000),
-  //   text: input,
-  // }
-  // );
-  // const fileRef = ref(storage, `${currentUser.uid}/${uuidv4()}`);
-  // const response = ref(storage, "data_url");
-  // const fileRef = storage.ref().child(`${currentUser.uid}/${uuidv4()}`);
-  // const response = await fileRef.putString(attachment, "data_url");
-
-  //   text: input,
-  //   creatorId: currentUser.uid,
-  //   name: currentUser.displayName,
-  //   //createdTRange: serverTimestamp(),
-  //   createdAt: Date.now(), //only this one can convert to date in ReadTasks
 
   console.log(inputs);
   const onFileChange = (event) => {
@@ -129,6 +123,7 @@ function TaskForm(props) {
               type="text"
               ref={inputRef}
               className="todo-input edit"
+              maxLength={140}
             />
             <button onClick={onSubmit} className="todo-button edit">
               Update
@@ -143,7 +138,6 @@ function TaskForm(props) {
               name="text"
               className="todo-input"
               ref={inputRef}
-              maxLength={140}
             />
             <button onClick={onSubmit} className="todo-button">
               Post it
