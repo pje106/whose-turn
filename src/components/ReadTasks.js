@@ -5,12 +5,14 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { TiPen } from "react-icons/ti";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
 
 function ReadTasks() {
   const [tasks, setTasks] = useState([]);
   const [editing, setEditing] = useState(false);
   const [newTasks, setNewTasks] = useState(tasks.text);
   const [editingTask, setEditingTask] = useState(null);
+  const { currentUser } = useAuth();
 
   // the useEffect hook is used to listen for changes in the tasks collection in the Firebase database. Whenever the collection is updated, the onSnapshot method is triggered, which updates the state of the tasks array. The input form allows users to add new tasks to the collection, and the updated tasks are displayed in the UI.
   useEffect(() => {
@@ -30,6 +32,8 @@ function ReadTasks() {
   const onDeleteClick = async (task) => {
     const ok = window.confirm("Are you sure you want to delete this task?");
     console.log(ok);
+    // console.log(task.creatorId);
+    // console.log(currentUser.uid);
     if (ok) {
       try {
         const taskRef = doc(db, "tasks", task.id);
@@ -111,17 +115,19 @@ function ReadTasks() {
                       />
                     )}
                   </div>
-                  <div style={{marginTop:"50px"}}>by {task.name}</div>
-                  <div className="icons">
-                    <TiPen
-                      onClick={() => toggleEditing(task)}
-                      className="edit-icon"
-                    />
-                    <MdOutlineDeleteOutline
-                      onClick={() => onDeleteClick(task)}
-                      className="delete-icon"
-                    />
-                  </div>
+                  <div style={{ marginTop: "50px" }}>by {task.name}</div>
+                  {task.creatorId === currentUser.uid && (
+                    <div className="icons">
+                      <TiPen
+                        onClick={() => toggleEditing(task)}
+                        className="edit-icon"
+                      />
+                      <MdOutlineDeleteOutline
+                        onClick={() => onDeleteClick(task)}
+                        className="delete-icon"
+                      />
+                    </div>
+                  )}
                 </div>
               );
             })}

@@ -63,7 +63,7 @@ function Navbar() {
               variant="h4"
               noWrap
               component="a"
-              href="/addtasks#/addTask"
+              href="/addTask"
               sx={{
                 ml: 2,
                 fontFamily: "monospace",
